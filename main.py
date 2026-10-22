@@ -110,4 +110,36 @@ def ordenar():
     mostrar()
 
 
-cargar()
+def main():
+    cargar()
+
+    while True:
+        print("\n<<< SISTEMA SHALOM >>>")
+        print("1. Registrar encomienda")
+        print("2. Buscar encomienda")
+        print("3. Actualizar estado")
+        print("4. Mostrar registros")
+        print("5. Ordenar por código")
+        print("6. Salir")
+
+        opcion = input("Opción: ").strip()
+
+        if opcion == "1":
+            registrar()
+        elif opcion == "2":
+            buscar()
+        elif opcion == "3":
+            actualizar()
+        elif opcion == "4":
+            mostrar()
+        elif opcion == "5":
+            ordenar()
+        elif opcion == "6":
+            print("Saliendo...")
+            break
+        else:
+            print("Opción inválida.")
+
+
+if __name__ == "__main__":
+    main()
