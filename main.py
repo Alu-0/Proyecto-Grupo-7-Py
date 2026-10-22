@@ -1,26 +1,26 @@
 
-import os
+# Commit 3: Registro y validación de encomiendas
+def registrar():
+    dni = input("DNI (8 dígitos): ").strip()
+    codigo = input("Código (mín. 4 caracteres): ").strip()
 
-archivo = "encomiendas.txt"
-encomiendas = []
+    if not dni.isdigit() or len(dni) != 8:
+        print("El DNI debe tener exactamente 8 números.")
+        return
 
+    if len(codigo) < 4 or "|" in codigo:
+        print("El código debe tener al menos 4 caracteres y no contener '|'.")
+        return
 
-# Commit 1: Carga y lectura del archivo de datos
-def cargar():
-    if os.path.exists(archivo):
-        with open(archivo, "r", encoding="utf-8") as f:
-            for linea in f:
-                datos = linea.strip().split("|")
-                if len(datos) == 3:
-                    encomiendas.append({
-                        "dni": datos[0],
-                        "codigo": datos[1],
-                        "estado": datos[2]
-                    })
+    if any(e["codigo"].upper() == codigo.upper() for e in encomiendas):
+        print("El código ya está registrado.")
+        return
 
+    encomiendas.append({
+        "dni": dni,
+        "codigo": codigo,
+        "estado": "Registrado"
+    })
 
-# Commit 2: Guardado de datos en el archivo
-def guardar():
-    with open(archivo, "w", encoding="utf-8") as f:
-        for e in encomiendas:
-            f.write(f"{e['dni']}|{e['codigo']}|{e['estado']}\n")
+    guardar()
+    print("¡Encomienda registrada y guardada!")
